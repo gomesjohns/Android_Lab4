@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBgColor"
+    android:orientation="horizontal">
+
+    <android.support.v7.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        app:cardBackgroundColor="@color/cardBGColor"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="10dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/field_patientIdText"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:gravity="start"
+                android:text="@string/patient_ID"
+                android:textColor="@color/textBlack"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/field_patientId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="0dp"
+                android:textColor="@color/textBlack"
+                android:textSize="16dp"
+                app:layout_constraintLeft_toRightOf="@+id/field_patientIdText"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/field_firstNameText"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="15dp"
+                android:gravity="start"
+                android:text="@string/patient_firstname"
+                android:textColor="@color/textBlack"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/field_patientIdText" />
+
+            <TextView
+                android:id="@+id/field_firstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/textBlack"
+                android:textSize="16dp"
+                app:layout_constraintLeft_toRightOf="@+id/field_firstNameText"
+                app:layout_constraintTop_toBottomOf="@+id/field_patientId" />
+
+            <TextView
+                android:id="@+id/field_lastNameText"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="15dp"
+                android:gravity="start"
+                android:text="@string/patient_lastname"
+                android:textColor="@color/textBlack"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/field_firstNameText" />
+
+            <TextView
+                android:id="@+id/field_lastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/textBlack"
+                android:textSize="16dp"
+                app:layout_constraintLeft_toRightOf="@+id/field_lastNameText"
+                app:layout_constraintTop_toBottomOf="@+id/field_firstName" />
+
+            <TextView
+                android:id="@+id/field_departmentText"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="15dp"
+                android:gravity="start"
+                android:text="@string/patient_department"
+                android:textColor="@color/textBlack"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/field_lastNameText" />
+
+            <TextView
+                android:id="@+id/field_department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/textBlack"
+                android:textSize="16dp"
+                app:layout_constraintLeft_toRightOf="@+id/field_departmentText"
+                app:layout_constraintTop_toBottomOf="@+id/field_lastName" />
+
+            <TextView
+                android:id="@+id/field_doctorIdText"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="15dp"
+                android:gravity="start"
+                android:text="@string/patient_doctorId"
+                android:textColor="@color/textBlack"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/field_departmentText" />
+
+            <TextView
+                android:id="@+id/field_doctorId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/textBlack"
+                android:textSize="16dp"
+                app:layout_constraintLeft_toRightOf="@+id/field_doctorIdText"
+                app:layout_constraintTop_toBottomOf="@+id/field_department" />
+
+            <TextView
+                android:id="@+id/field_roomText"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="15dp"
+                android:gravity="start"
+                android:text="@string/patient_room"
+                android:textColor="@color/textBlack"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/field_doctorIdText" />
+
+            <TextView
+                android:id="@+id/field_room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/textBlack"
+                android:textSize="16dp"
+                app:layout_constraintLeft_toRightOf="@+id/field_roomText"
+                app:layout_constraintTop_toBottomOf="@+id/field_doctorId" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

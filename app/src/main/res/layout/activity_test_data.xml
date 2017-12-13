@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBgColor"
+    tools:context="gomes.john.johngomes_comp304lab4.activities.TestDataActivity">
+
+    <EditText
+        android:id="@+id/editTextTestID"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:hint="@string/test_testId"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.508" />
+
+    <EditText
+        android:id="@+id/editTextPatientID"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="@string/test_patientId"
+        android:inputType="textPersonName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTestID" />
+
+    <EditText
+        android:id="@+id/editTextNurseID"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:ems="10"
+        android:hint="@string/test_nurseId"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPatientID"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextBPL"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="@string/test_BPL"
+        android:inputType="numberDecimal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNurseID" />
+
+    <EditText
+        android:id="@+id/editTextBPH"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:ems="10"
+        android:hint="@string/test_BPH"
+        android:inputType="numberDecimal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBPL" />
+
+    <EditText
+        android:id="@+id/editTextTemp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="@string/test_temp"
+        android:inputType="numberDecimal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBPH" />
+
+    <Button
+        android:id="@+id/buttonEnterData"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="55dp"
+        android:text="@string/test_EnterData"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTemp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/test_details"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="147dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="60dp" />
+</android.support.constraint.ConstraintLayout>

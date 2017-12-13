@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">JohnGomes_COMP304Lab4</string>
+    <string name="logoDes">Company Logo</string>
+
+    <string name="userId">Employee ID</string>
+    <string name="pass">Password</string>
+
+    <string name="check_nurse">Nurse</string>
+    <string name="check_doctor">Doctor</string>
+
+    <string name="reg_ID">Employee ID</string>
+    <string name="reg_firstname">First Name</string>
+    <string name="reg_lastname">Last Name</string>
+    <string name="reg_department">Department</string>
+    <string name="reg_password">Password</string>
+    <string name="reg_confirmPass">Confirm Password</string>
+
+    <string name="loginBtn">LOG IN</string>
+    <string name="registerBtn">REGISTER</string>
+
+    <string name="registerText">Don\'t have an account yet? Register</string>
+    <string name="LoginText">Already have an account? Login</string>
+
+    <string name="error_message_empty">Required Field</string>
+    <string name="error_message_invalidUserOrPass">Required Field</string>
+
+    <string name="test_testId">Test ID</string>
+    <string name="test_patientId">Patient ID</string>
+    <string name="test_nurseId">Nurse ID</string>
+    <string name="test_BPL">BPL</string>
+    <string name="test_BPH">BPH</string>
+    <string name="test_temp">Temperature</string>
+
+    <string name="test_EnterData">ENTER DATA</string>
+    <string name="test_details">Test Details</string>
+
+    <string name="patient_ID">Patient ID</string>
+    <string name="patient_firstname">First Name</string>
+    <string name="patient_lastname">Last Name</string>
+    <string name="patient_department">Department</string>
+    <string name="patient_doctorId">Doctor ID</string>
+    <string name="patient_room">Room</string>
+
+    <string name="patient_btnAdd">Add Patient</string>
+    <string name="patient_btnView">View Patient</string>
+    <string name="patient_btnDelete">Delete Patient</string>
+
+    <string name="patient_details">Patient Details</string>
+
+</resources>
