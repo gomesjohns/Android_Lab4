@@ -71,7 +71,6 @@ public class PatientListActivity extends AppCompatActivity
             {
                 listPatients.clear();
                 listPatients.addAll(databaseManager.getAllPatients());
-
                 return null;
             }
             @Override
