@@ -1,6 +1,7 @@
 package gomes.john.johngomes_comp304lab4.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,7 @@ public class PatientActivity extends AppCompatActivity implements View.OnClickLi
 
     private Button addPatient;
     private Button viewPatient;
+    private Button createTests;
 
 
     private DatabaseManager databaseManager;
@@ -37,6 +39,7 @@ public class PatientActivity extends AppCompatActivity implements View.OnClickLi
 
     private Patient patient;
 
+    private String sharedPrefId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class PatientActivity extends AppCompatActivity implements View.OnClickLi
         initViews();
         initListeners();
         initObjects();
+        initSharedPref();
     }
 
     private void initViews()
@@ -59,12 +63,14 @@ public class PatientActivity extends AppCompatActivity implements View.OnClickLi
 
         addPatient = (Button) findViewById(R.id.buttonAddPatient);
         viewPatient = (Button) findViewById(R.id.buttonViewPatients);
+        createTests = (Button) findViewById(R.id.buttonCreateTests);
     }
 
     private void initListeners()
     {
         addPatient.setOnClickListener(this);
         viewPatient.setOnClickListener(this);
+        createTests.setOnClickListener(this);
     }
 
     private void initObjects()
@@ -73,6 +79,14 @@ public class PatientActivity extends AppCompatActivity implements View.OnClickLi
         inputValidation = new InputValidation(activity);
 
         patient = new Patient();
+    }
+
+    private void initSharedPref()
+    {
+        //Init SharedPref
+        SharedPreferences myPref = getSharedPreferences("doctorPref",0);
+        sharedPrefId= myPref.getString("doctorIdPref", null);
+        Toast.makeText(getApplicationContext(), "Welcome " + sharedPrefId, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -87,6 +101,10 @@ public class PatientActivity extends AppCompatActivity implements View.OnClickLi
                 Intent intentPList = new Intent(getApplicationContext(), PatientListActivity.class);
                 startActivity(intentPList);
                 break;
+            case R.id.buttonCreateTests:
+                Intent intentTest = new Intent(getApplicationContext(), TestDataActivity.class);
+                startActivity(intentTest);
+                break;
         }
     }
 
@@ -99,7 +117,6 @@ public class PatientActivity extends AppCompatActivity implements View.OnClickLi
                 patient.setDepartment(patientDepartment.getText().toString().trim());
                 patient.setDoctorId(patientDoctorID.getText().toString().trim());
                 patient.setRoom(patientRoom.getText().toString().trim());
-
 
                 databaseManager.addPatient(patient);
 

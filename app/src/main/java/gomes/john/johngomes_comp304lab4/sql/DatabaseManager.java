@@ -202,7 +202,7 @@ public class DatabaseManager extends SQLiteOpenHelper
         values.put(COLUMN_PATIENT_TEST_ID, test.getPatientId());
         values.put(COLUMN_NURSE_TEST_ID, test.getNurseId());
         values.put(COLUMN_BPL, test.getBPL());
-        values.put(COLUMN_BPL, test.getBPH());
+        values.put(COLUMN_BPH, test.getBPH());
         values.put(COLUMN_TEMPERATURE, test.getTemperature());
 
         db.insert(TABLE_TEST, null, values);
@@ -348,7 +348,7 @@ public class DatabaseManager extends SQLiteOpenHelper
         return false;
     }
 
-    //----------------------------------------------Check DB for Test-------------------------------------------------
+    //----------------------------------------------Check DB for Test--------------------------------------------------
     //Check Doctor
     public boolean checkTestId(String testID)
     {
@@ -356,6 +356,34 @@ public class DatabaseManager extends SQLiteOpenHelper
         String [] columns = {COLUMN_TEST_ID};
         String selection = COLUMN_TEST_ID+ " = ?";
         String [] selectionArgs = {testID};
+
+        Cursor cursor = db.query(TABLE_TEST,
+                columns,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        if(cursorCount > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    //-------------------------------------------Check Test DB for Patient---------------------------------------------
+    //Check Doctor
+    public boolean checkTestForPatient(String patientId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String [] columns = {COLUMN_PATIENT_TEST_ID};
+        String selection = COLUMN_PATIENT_TEST_ID+ " = ?";
+        String [] selectionArgs = {patientId};
 
         Cursor cursor = db.query(TABLE_TEST,
                 columns,
@@ -425,5 +453,59 @@ public class DatabaseManager extends SQLiteOpenHelper
 
         //Return patient list
         return patientList;
+    }
+
+    //---------------------------------------------Fetch Patient Tests------------------------------------------------
+    public List<Test> getPatientsTests(String patientId)
+    {
+        //Array of columns to fetch
+        String [] columns = {
+                COLUMN_TEST_ID,
+                COLUMN_PATIENT_TEST_ID,
+                COLUMN_NURSE_TEST_ID,
+                COLUMN_BPL,
+                COLUMN_BPH,
+                COLUMN_TEMPERATURE
+        };
+
+        String selection = COLUMN_PATIENT_TEST_ID+ " = ?"; //The row data to be returned from the column(WHERE clause)
+        String [] selectionArgs = {patientId};
+
+        //Sorting Order
+        String sortOrder = COLUMN_TEST_ID + " ASC";
+
+        List<Test> patientTestList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.query(TABLE_TEST,
+                columns,    //Columns to return
+                selection,       //Columns for WHERE clause
+                selectionArgs,       //The values for WHERE clause
+                null,       //Group the rows
+                null,       //Filter the row groups
+                sortOrder); //The sort order
+
+        //Traversing through all rows and adding to list
+        if (cursor.moveToFirst())
+        {
+            do {
+                Test test = new Test();
+                test.setTestId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_TEST_ID))));
+                test.setPatientId(cursor.getString(cursor.getColumnIndex(COLUMN_PATIENT_TEST_ID)));
+                test.setNurseId(cursor.getString(cursor.getColumnIndex(COLUMN_NURSE_TEST_ID)));
+                test.setBPL(cursor.getString(cursor.getColumnIndex(COLUMN_BPL)));
+                test.setBPH(cursor.getString(cursor.getColumnIndex(COLUMN_BPH)));
+                test.setTemperature(cursor.getString(cursor.getColumnIndex(COLUMN_TEMPERATURE)));
+
+                patientTestList.add(test);
+            }
+            while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        //Return patient tests list
+        return patientTestList;
     }
 }

@@ -2,6 +2,7 @@ package gomes.john.johngomes_comp304lab4.helper;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,8 +14,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import gomes.john.johngomes_comp304lab4.R;
+import gomes.john.johngomes_comp304lab4.activities.PatientActivity;
+import gomes.john.johngomes_comp304lab4.activities.PatientTestList;
 import gomes.john.johngomes_comp304lab4.activities.TestDataActivity;
 import gomes.john.johngomes_comp304lab4.model.Patient;
+import gomes.john.johngomes_comp304lab4.sql.DatabaseManager;
 
 import static android.content.ContentValues.TAG;
 
@@ -22,15 +26,18 @@ import static android.content.ContentValues.TAG;
  * Created by John on 2017-12-12.
  */
 
-public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.PatientViewHolder>
+public class DisplayAdapterPatients extends RecyclerView.Adapter<DisplayAdapterPatients.PatientViewHolder>
 {
     private Context context;
     private ArrayList<Patient> listPatients;
+    private DatabaseManager databaseManager;
+    private String selctedPatientID;
 
-    public DisplayAdapter(Context _context, ArrayList<Patient> _listPatients)
+    public DisplayAdapterPatients(Context _context, ArrayList<Patient> _listPatients)
     {
         this.listPatients = _listPatients;
         this.context = _context;
+        databaseManager = new DatabaseManager(context);
     }
 
     @Override
@@ -64,15 +71,11 @@ public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.PatientV
         public PatientViewHolder(View itemView)
         {
             super(itemView);
-
-            //this.patients = patients;
-            //this.context = ctx;
-
-            patientId = itemView.findViewById(R.id.field_testId);
-            firstName = itemView.findViewById(R.id.field_patientId);
-            lastName = itemView.findViewById(R.id.field_nurseId);
-            department = itemView.findViewById(R.id.field_BPL);
-            doctorId = itemView.findViewById(R.id.field_BPH);
+            patientId = itemView.findViewById(R.id.field_patientId);
+            firstName = itemView.findViewById(R.id.field_firstName);
+            lastName = itemView.findViewById(R.id.field_lastName);
+            department = itemView.findViewById(R.id.field_department);
+            doctorId = itemView.findViewById(R.id.field_doctorId);
             room = itemView.findViewById(R.id.field_room);
 
             itemView.setOnClickListener(this);
@@ -84,10 +87,27 @@ public class DisplayAdapter extends RecyclerView.Adapter<DisplayAdapter.PatientV
             int position = getAdapterPosition();
             Log.v(TAG, "onClick " + this.getAdapterPosition());
             listPatients.get(position);
-            Intent intentTest = new Intent(itemView.getContext(), TestDataActivity.class);
-            itemView.getContext().startActivity(intentTest);
-            Toast.makeText(context, patientId.getText().toString(), Toast.LENGTH_LONG ).show();
+            selctedPatientID= patientId.getText().toString().trim();
+            verifyFromSQL();
+        }
+
+        private void verifyFromSQL()
+        {
+            //Data Query
+            if (databaseManager.checkTestForPatient(selctedPatientID))
+            {
+                //Start Patient Tests Activities
+                Intent intentTestList = new Intent(itemView.getContext(), PatientTestList.class);
+                intentTestList.putExtra("patient_Id", selctedPatientID);
+                itemView.getContext().startActivity(intentTestList);
+            }
+            else
+            {
+                Toast.makeText(context, "No test exists for this patient", Toast.LENGTH_SHORT).show();
+            }
         }
     }
+
+
 
 }

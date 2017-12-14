@@ -87,13 +87,14 @@
 
     <Button
         android:id="@+id/buttonAddPatient"
-        android:layout_width="150dp"
+        android:layout_width="350dp"
         android:layout_height="60dp"
+        android:layout_marginTop="30dp"
         android:text="@string/patient_btnAdd"
-        android:layout_marginTop="50dp"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRoom"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRoom" />
 
     <TextView
         android:id="@+id/textViewActivityTitle"
@@ -101,21 +102,37 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:text="@string/patient_details"
         android:textAllCaps="true"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintHorizontal_bias="0.504" />
 
     <Button
         android:id="@+id/buttonViewPatients"
-        android:layout_width="150dp"
+        android:layout_width="350dp"
         android:layout_height="60dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="15dp"
         android:text="@string/patient_btnView"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRoom" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddPatient" />
+
+    <Button
+        android:id="@+id/buttonCreateTests"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:text="Create Tests"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonViewPatients"
+        tools:layout_editor_absoluteX="55dp" />
 </android.support.constraint.ConstraintLayout>

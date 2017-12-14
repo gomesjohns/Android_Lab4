@@ -31,20 +31,21 @@ public class InputValidation {
         {
             employeeId.setError(message);
             hideKeyboardFrom(employeeId);
-            //return false;
+            return true;
         }
-        if(value2.isEmpty())
+        else if(value2.isEmpty())
         {
             password.setError(message);
             hideKeyboardFrom(password);
-            //return false;
+            return true;
         }
         else
         {
             employeeId.setError(null);
             password.setError(null);
+            return false;
         }
-        return false;
+
     }
 
 

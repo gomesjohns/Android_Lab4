@@ -43,8 +43,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initListeners();
         initObjects();
 
-        //checkNurse = getIntent().getExtras().getBoolean("checkBoxNurse");
-        //checkDoctor = getIntent().getExtras().getBoolean("checkBoxDoctor");
     }
 
     private void initViews()
@@ -75,7 +73,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         {
             case R.id.loginBtn:
                 inputValidation();
-                verifyFromSQL();
                 break;
             case R.id.textviewLinkRegister:
                 Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
@@ -88,7 +85,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     {
         if(!inputValidation.isInputEditTextFilled(inputEmployeeID ,inputPassword, getString(R.string.error_message_empty)))
         {
-            return;
+            verifyFromSQL();
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -115,8 +116,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             editor.putString("nurseIdPref", inputEmployeeID.getText().toString().trim());
             editor.apply();
 
-            Intent intentPatient= new Intent(getApplicationContext(), PatientActivity.class);
-            startActivity(intentPatient);
+            Intent intentTest= new Intent(getApplicationContext(), TestDataActivity.class);
+            startActivity(intentTest);
             emptyTextview();
         }
         else

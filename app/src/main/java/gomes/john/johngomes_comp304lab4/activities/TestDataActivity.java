@@ -32,6 +32,8 @@ public class TestDataActivity extends AppCompatActivity implements View.OnClickL
     private EditText temperature;
 
     private Button enterTestDataBtn;
+    private Button viewPatientDetailsBtn;
+
 
     private DatabaseManager databaseManager;
     private InputValidation inputValidation;
@@ -49,6 +51,8 @@ public class TestDataActivity extends AppCompatActivity implements View.OnClickL
         initListeners();
         initObjects();
         initSharedPref();
+
+        //nurseID.setEnabled(false);
     }
 
     private void initViews()
@@ -61,12 +65,14 @@ public class TestDataActivity extends AppCompatActivity implements View.OnClickL
         temperature = (EditText) findViewById(R.id.editTextTemp);
 
         enterTestDataBtn = (Button) findViewById(R.id.buttonEnterData);
+        viewPatientDetailsBtn = (Button) findViewById(R.id.buttonPatients);
 
     }
 
     private void initListeners()
     {
         enterTestDataBtn.setOnClickListener(this);
+        viewPatientDetailsBtn.setOnClickListener(this);
     }
 
     private void initObjects()
@@ -74,7 +80,6 @@ public class TestDataActivity extends AppCompatActivity implements View.OnClickL
         databaseManager = new DatabaseManager(activity);
         inputValidation = new InputValidation(activity);
         test = new Test();
-
     }
 
     private void initSharedPref()
@@ -83,6 +88,7 @@ public class TestDataActivity extends AppCompatActivity implements View.OnClickL
         SharedPreferences myPref = getSharedPreferences("nursePref",0);
         sharedPrefId= myPref.getString("nurseIdPref", null);
         nurseID.setText(sharedPrefId);
+        Toast.makeText(getApplicationContext(), "Welcome " + sharedPrefId, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -93,6 +99,11 @@ public class TestDataActivity extends AppCompatActivity implements View.OnClickL
             case R.id.buttonEnterData:
                 postDataToSQL();
                 break;
+            case R.id.buttonPatients:
+                Intent intentPat= new Intent(getApplicationContext(), PatientActivity.class);
+                startActivity(intentPat);
+                emptyEditText();
+                break;
         }
     }
 
@@ -100,11 +111,12 @@ public class TestDataActivity extends AppCompatActivity implements View.OnClickL
     {
         if (!databaseManager.checkTestId(testID.getText().toString().trim()))
         {
-            test.setTestId(testID.getText().toString().trim());
+            test.setTestId(Integer.parseInt(testID.getText().toString().trim()));
             test.setPatientId(patientID.getText().toString().trim());
             test.setNurseId(nurseID.getText().toString().trim());
             test.setBPL(BPL.getText().toString().trim());
             test.setBPH(BPH.getText().toString().trim());
+            test.setTemperature(temperature.getText().toString().trim());
 
             databaseManager.addTest(test);
 

@@ -7,14 +7,14 @@ package gomes.john.johngomes_comp304lab4.model;
 public class Test {
 
     //Private instance variables
-    String testId;
+    int testId;
     String patientId;
     String nurseId;
     String BPL;
     String BPH;
     String temperature;
 
-    public Test(String testId, String patientId, String nurseId, String BPL, String BPH, String temperature)
+    public Test(int testId, String patientId, String nurseId, String BPL, String BPH, String temperature)
     {
         this.testId = testId;
         this.patientId = patientId;
@@ -27,11 +27,11 @@ public class Test {
     public Test() {
     }
 
-    public String getTestId() {
+    public int getTestId() {
         return testId;
     }
 
-    public void setTestId(String testId) {
+    public void setTestId(int testId) {
         this.testId = testId;
     }
 
