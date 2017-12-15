@@ -9,9 +9,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
 import gomes.john.johngomes_comp304lab4.R;
 import gomes.john.johngomes_comp304lab4.helper.InputValidation;
 import gomes.john.johngomes_comp304lab4.model.Doctor;
@@ -20,24 +17,20 @@ import gomes.john.johngomes_comp304lab4.sql.DatabaseManager;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //Global variables
     private final AppCompatActivity activity= RegisterActivity.this;
-
     private EditText registerID;
     private EditText registerFirstName;
     private EditText registerLastName;
     private EditText registerDepartment;
     private EditText registerPassword;
     private EditText registerConfirmPass;
-
     private Button registerBtn;
     private TextView buttonLinkLogin;
-
     private CheckBox checkBoxNurse;
     private CheckBox checkBoxDoctor;
-
     private DatabaseManager databaseManager;
     private InputValidation inputValidation;
-
     private Doctor doctor;
     private Nurse nurse;
 
@@ -51,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         initObjects();
     }
 
+    //Init views
     private void initViews()
     {
         registerID = (EditText) findViewById(R.id.editTextEmpID);
@@ -67,6 +61,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         checkBoxDoctor = (CheckBox) findViewById(R.id.checkBoxDoctor);
     }
 
+    //Init listeners
     private void initListeners()
     {
         registerBtn.setOnClickListener(this);
@@ -75,6 +70,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         checkBoxDoctor.setOnClickListener(this);
     }
 
+    //Init objects
     private void initObjects()
     {
         databaseManager = new DatabaseManager(activity);
@@ -83,29 +79,24 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         nurse = new Nurse();
     }
 
-    @Override
-    public void onClick(View v)
+    //Validate input
+    private void inputValidation()
     {
-        switch(v.getId())
+        //Validate no field is empty, passwords match, at least one check box checked
+        if((!inputValidation.isInputEditTextFilled(registerID , registerFirstName, registerLastName,
+            registerDepartment, registerPassword, registerConfirmPass, getString(R.string.error_message_empty)))
+            && (inputValidation.isInputTextMatches(registerPassword, registerConfirmPass, getString(R.string.error_message_noMatch)))
+            && (!inputValidation.isCheckboxChecked(checkBoxNurse, checkBoxDoctor, getString(R.string.error_message_checkBox))))
         {
-            case R.id.registerButton:
-                postDataToSQL();
-                break;
-            case R.id.textviewLinkLogin:
-                Intent intentLogin = new Intent(getApplicationContext(), LoginActivity.class);
-                intentLogin.putExtra("checkBoxNurse", checkBoxNurse.isChecked());
-                intentLogin.putExtra("checkBoxDoctor", checkBoxDoctor.isChecked());
-                startActivity(intentLogin);
-                break;
-            case R.id.checkBoxDoctor:
-                checkBoxNurse.setChecked(false);
-                break;
-            case R.id.checkBoxNurse:
-                checkBoxDoctor.setChecked(false);
-                break;
+            postDataToSQL();
+        }
+        else
+        {
+            //Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
         }
     }
 
+    //Post data to SQLite database
     private void postDataToSQL()
     {
         //Nurse Checked
@@ -155,5 +146,29 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         registerDepartment.setText(null);
         registerPassword.setText(null);
         registerConfirmPass.setText(null);
+    }
+
+    //OnClick of buttons or links
+    @Override
+    public void onClick(View v)
+    {
+        switch(v.getId())
+        {
+            case R.id.registerButton:
+                inputValidation();
+                break;
+            case R.id.textviewLinkLogin:
+                Intent intentLogin = new Intent(getApplicationContext(), LoginActivity.class);
+                intentLogin.putExtra("checkBoxNurse", checkBoxNurse.isChecked());
+                intentLogin.putExtra("checkBoxDoctor", checkBoxDoctor.isChecked());
+                startActivity(intentLogin);
+                break;
+            case R.id.checkBoxDoctor:
+                checkBoxNurse.setChecked(false);
+                break;
+            case R.id.checkBoxNurse:
+                checkBoxDoctor.setChecked(false);
+                break;
+        }
     }
 }

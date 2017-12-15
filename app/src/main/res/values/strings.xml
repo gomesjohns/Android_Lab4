@@ -22,7 +22,8 @@
     <string name="LoginText">Already have an account? Login</string>
 
     <string name="error_message_empty">Required Field</string>
-    <string name="error_message_invalidUserOrPass">Required Field</string>
+    <string name="error_message_noMatch">Password doesn\'t match</string>
+    <string name="error_message_checkBox">One Checkbox Required</string>
 
     <string name="test_testId">Test ID</string>
     <string name="test_patientId">Patient ID</string>
@@ -35,6 +36,7 @@
     <string name="test_patient">Patient Details</string>
     <string name="test_details">Test Details</string>
 
+
     <string name="patient_ID">Patient ID</string>
     <string name="patient_firstname">First Name</string>
     <string name="patient_lastname">Last Name</string>
@@ -43,7 +45,9 @@
     <string name="patient_room">Room</string>
 
     <string name="patient_btnAdd">Add Patient</string>
+    <string name="patient_btnUpdate">Update Patient</string>
     <string name="patient_btnView">View Patient</string>
+    <string name="test_CreateTest">Create Test</string>
     <string name="patient_btnDelete">Delete Patient</string>
 
     <string name="patient_details">Patient Details</string>

@@ -1,6 +1,7 @@
 package gomes.john.johngomes_comp304lab4.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ public class PatientListActivity extends AppCompatActivity
         initViews();
         initObjects();
     }
+
     private void initViews()
     {
         recyclerViewPatient = (RecyclerView) findViewById(R.id.pateint_recyclerView);

@@ -21,25 +21,19 @@ import gomes.john.johngomes_comp304lab4.sql.DatabaseManager;
 
 public class TestDataActivity extends AppCompatActivity implements View.OnClickListener
 {
-
+    //Global variables
     private final AppCompatActivity activity= TestDataActivity.this;
-
     private EditText testID;
     private EditText patientID;
     private EditText nurseID;
     private EditText BPL;
     private EditText BPH;
     private EditText temperature;
-
     private Button enterTestDataBtn;
     private Button viewPatientDetailsBtn;
-
-
     private DatabaseManager databaseManager;
     private InputValidation inputValidation;
-
     private Test test;
-
     private String sharedPrefId;
 
     @Override
@@ -51,10 +45,9 @@ public class TestDataActivity extends AppCompatActivity implements View.OnClickL
         initListeners();
         initObjects();
         initSharedPref();
-
-        //nurseID.setEnabled(false);
     }
 
+    //Init views
     private void initViews()
     {
         testID = (EditText) findViewById(R.id.editTextTestID);
@@ -66,15 +59,16 @@ public class TestDataActivity extends AppCompatActivity implements View.OnClickL
 
         enterTestDataBtn = (Button) findViewById(R.id.buttonEnterData);
         viewPatientDetailsBtn = (Button) findViewById(R.id.buttonPatients);
-
     }
 
+    //Init listeners
     private void initListeners()
     {
         enterTestDataBtn.setOnClickListener(this);
         viewPatientDetailsBtn.setOnClickListener(this);
     }
 
+    //Init objects
     private void initObjects()
     {
         databaseManager = new DatabaseManager(activity);
@@ -82,31 +76,30 @@ public class TestDataActivity extends AppCompatActivity implements View.OnClickL
         test = new Test();
     }
 
+    //Get shared preference
     private void initSharedPref()
     {
         //Init SharedPref
-        SharedPreferences myPref = getSharedPreferences("nursePref",0);
-        sharedPrefId= myPref.getString("nurseIdPref", null);
+        SharedPreferences myPref = getSharedPreferences("empId",0);
+        sharedPrefId= myPref.getString("empIdPref", null);
+        //Set nurseId to the employee id currently signed in (Only Nurses)
         nurseID.setText(sharedPrefId);
-        Toast.makeText(getApplicationContext(), "Welcome " + sharedPrefId, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onClick(View v)
+    //Validate input
+    private void inputTestValidationTest()
     {
-        switch(v.getId())
+        if((!inputValidation.isTestInputEditTextFilled(testID, patientID, nurseID, BPL, BPH, temperature, getString(R.string.error_message_empty))))
         {
-            case R.id.buttonEnterData:
-                postDataToSQL();
-                break;
-            case R.id.buttonPatients:
-                Intent intentPat= new Intent(getApplicationContext(), PatientActivity.class);
-                startActivity(intentPat);
-                emptyEditText();
-                break;
+            postDataToSQL();
+        }
+        else
+        {
+            //Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
         }
     }
 
+    //Post test data to SQLite database
     private void postDataToSQL()
     {
         if (!databaseManager.checkTestId(testID.getText().toString().trim()))
@@ -133,10 +126,26 @@ public class TestDataActivity extends AppCompatActivity implements View.OnClickL
     {
         testID.setText(null);
         patientID.setText(null);
-        nurseID.setText(null);
         BPL.setText(null);
         BPH.setText(null);
         temperature.setText(null);
+    }
+
+    //OnClick of buttons
+    @Override
+    public void onClick(View v)
+    {
+        switch(v.getId())
+        {
+            case R.id.buttonEnterData:
+                inputTestValidationTest();
+                break;
+            case R.id.buttonPatients:
+                Intent intentPat= new Intent(getApplicationContext(), PatientActivity.class);
+                startActivity(intentPat);
+                emptyEditText();
+                break;
+        }
     }
 
 }

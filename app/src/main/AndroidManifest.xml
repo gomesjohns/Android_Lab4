@@ -34,7 +34,7 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.PatientActivity" />
+                android:value=".activities.PatientListActivity" />
 
         </activity>
     </application>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appBgColor"
+    android:background="?android:attr/selectableItemBackground"
     android:orientation="horizontal">
 
     <android.support.v7.widget.CardView
@@ -31,7 +31,7 @@
 
             <TextView
                 android:id="@+id/field_testIdText"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="0dp"
@@ -50,134 +50,135 @@
 
                 android:textColor="@color/textBlack"
                 android:textSize="16dp"
-                tools:layout_editor_absoluteY="0dp"
                 app:layout_constraintLeft_toRightOf="@+id/field_testIdText"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="0dp" />
 
             <TextView
                 android:id="@+id/field_patientIdText"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-8dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="0dp"
                 android:gravity="start"
                 android:text="@string/patient_ID"
                 android:textColor="@color/textBlack"
                 android:textSize="16dp"
                 android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/field_testIdText" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="170dp"
+                app:layout_constraintLeft_toLeftOf="@+id/field_testIdText" />
 
             <TextView
                 android:id="@+id/field_patientId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
                 android:textColor="@color/textBlack"
                 android:textSize="16dp"
                 app:layout_constraintLeft_toRightOf="@+id/field_patientIdText"
-                app:layout_constraintTop_toBottomOf="@+id/field_testId" />
+                android:layout_marginLeft="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="0dp" />
 
             <TextView
                 android:id="@+id/field_nurseIdText"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="15dp"
                 android:gravity="start"
                 android:text="@string/test_nurseId"
                 android:textColor="@color/textBlack"
                 android:textSize="16dp"
                 android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/field_patientIdText" />
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/field_testIdText"
+                android:layout_marginLeft="0dp"
+                app:layout_constraintLeft_toLeftOf="parent" />
 
             <TextView
                 android:id="@+id/field_nurseId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
                 android:textColor="@color/textBlack"
                 android:textSize="16dp"
                 app:layout_constraintLeft_toRightOf="@+id/field_nurseIdText"
-                app:layout_constraintTop_toBottomOf="@+id/field_patientId" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/field_testIdText" />
 
             <TextView
                 android:id="@+id/field_BPLText"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="15dp"
                 android:gravity="start"
                 android:text="@string/test_BPL"
                 android:textColor="@color/textBlack"
                 android:textSize="16dp"
                 android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/field_nurseIdText" />
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/field_patientIdText"
+                android:layout_marginLeft="170dp"
+                app:layout_constraintLeft_toLeftOf="@+id/field_nurseIdText" />
 
             <TextView
                 android:id="@+id/field_BPL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
                 android:textColor="@color/textBlack"
                 android:textSize="16dp"
                 app:layout_constraintLeft_toRightOf="@+id/field_BPLText"
-                app:layout_constraintTop_toBottomOf="@+id/field_nurseId" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/field_patientIdText" />
 
             <TextView
                 android:id="@+id/field_BPHTExt"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="15dp"
                 android:gravity="start"
                 android:text="@string/test_BPH"
                 android:textColor="@color/textBlack"
                 android:textSize="16dp"
                 android:textStyle="bold"
+                android:layout_marginLeft="0dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/field_BPLText" />
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/field_nurseIdText" />
 
             <TextView
                 android:id="@+id/field_BPH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
                 android:textColor="@color/textBlack"
                 android:textSize="16dp"
                 app:layout_constraintLeft_toRightOf="@+id/field_BPHTExt"
-                app:layout_constraintTop_toBottomOf="@+id/field_BPL" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/field_nurseIdText" />
 
             <TextView
                 android:id="@+id/field_tempText"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="9dp"
                 android:gravity="start"
                 android:text="@string/test_temp"
                 android:textColor="@color/textBlack"
                 android:textSize="16dp"
                 android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/field_BPHTExt" />
+                app:layout_constraintTop_toBottomOf="@+id/field_BPLText"
+                android:layout_marginLeft="170dp"
+                app:layout_constraintLeft_toLeftOf="@+id/field_BPHTExt" />
 
             <TextView
                 android:id="@+id/field_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
                 android:textColor="@color/textBlack"
                 android:textSize="16dp"
                 app:layout_constraintLeft_toRightOf="@+id/field_tempText"
-                app:layout_constraintTop_toBottomOf="@+id/field_BPH" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/field_BPL" />
 
         </android.support.constraint.ConstraintLayout>
 

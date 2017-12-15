@@ -27,7 +27,7 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/test_patientId"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTestID" />

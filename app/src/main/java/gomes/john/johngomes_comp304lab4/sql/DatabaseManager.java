@@ -209,6 +209,26 @@ public class DatabaseManager extends SQLiteOpenHelper
         db.close();
     }
 
+    //---------------------------------------------Update Record-------------------------------------------
+    //Update Patient
+    public void updatePatient(Patient patient)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        String selection = COLUMN_PATIENT_ID+ " = ?"; //The row data to be returned from the column(WHERE clause)
+        String [] selectionArgs = {String.valueOf(patient.getPatientId())}; //Substituted for the " = ?" in the selection
+
+        values.put(COLUMN_PATIENT_ID, patient.getPatientId());
+        values.put(COLUMN_PATIENT_FIRSTNAME, patient.getFirstName());
+        values.put(COLUMN_PATIENT_LASTNAME, patient.getLastName());
+        values.put(COLUMN_PATIENT_DEPARTMENT, patient.getDepartment());
+        values.put(COLUMN_PATIENT_DOCTOR_ID, patient.getDoctorId());
+        values.put(COLUMN_PATIENT_ROOM, patient.getRoom());
+
+        db.update(TABLE_PATIENT, values, selection, selectionArgs);
+        db.close();
+    }
 
     //----------------------------------------------Check DB for Login---------------------------------------------
     //Check Doctor
@@ -237,6 +257,32 @@ public class DatabaseManager extends SQLiteOpenHelper
         }
         return false;
     }
+    //Check Doctor
+    public boolean checkDoctor(String doctorID)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String [] columns = {COLUMN_DOCTOR_ID}; //Column names for query
+        String selection = COLUMN_DOCTOR_ID+ " = ?"; //The row data to be returned from the column(WHERE clause)
+        String [] selectionArgs = {doctorID}; //Substituted for the " = ?" in the selection
+
+        Cursor cursor = db.query(TABLE_DOCTOR,
+                columns,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        if(cursorCount > 0)
+        {
+            return true;
+        }
+        return false;
+    }
 
     //Check Nurse
     public boolean checkNurse(String nurseID, String password)
@@ -245,6 +291,32 @@ public class DatabaseManager extends SQLiteOpenHelper
         String [] columns = {COLUMN_NURSE_ID}; //Column names for query
         String selection = COLUMN_NURSE_ID+ " = ?" + " AND "+ COLUMN_NURSE_PASSWORD+ " = ?"; //The row data to be returned from the column(WHERE clause)
         String [] selectionArgs = {nurseID, password}; //Substituted for the " = ?" in the selection
+
+        Cursor cursor = db.query(TABLE_NURSE,
+                columns,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        if(cursorCount > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+    //Check Nurse
+    public boolean checkNurse(String nurseID)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String [] columns = {COLUMN_NURSE_ID}; //Column names for query
+        String selection = COLUMN_NURSE_ID+ " = ?"; //The row data to be returned from the column(WHERE clause)
+        String [] selectionArgs = {nurseID}; //Substituted for the " = ?" in the selection
 
         Cursor cursor = db.query(TABLE_NURSE,
                 columns,

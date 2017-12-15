@@ -10,28 +10,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import gomes.john.johngomes_comp304lab4.helper.InputValidation;
 import gomes.john.johngomes_comp304lab4.sql.DatabaseManager;
 import gomes.john.johngomes_comp304lab4.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener
 {
-
+    //Global variables
     private final AppCompatActivity activity= LoginActivity.this;
-
     private EditText inputEmployeeID;
     private EditText inputPassword;
     private TextView buttonLinkRegister;
-
     private Button loginButton;
-
     private DatabaseManager databaseManager;
     private InputValidation inputValidation;
-
-    private boolean checkNurse;
-    private boolean checkDoctor;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,9 +34,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initViews();
         initListeners();
         initObjects();
-
     }
 
+    //Init views
     private void initViews()
     {
         inputEmployeeID = (EditText) findViewById(R.id.loginEmployeeId);
@@ -54,33 +46,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         buttonLinkRegister =(TextView) findViewById(R.id.textviewLinkRegister);
     }
 
+    //Init listeners
     private void initListeners()
     {
         loginButton.setOnClickListener(this);
         buttonLinkRegister.setOnClickListener(this);
     }
 
+    //Init objects
     private void initObjects()
     {
         databaseManager = new DatabaseManager(activity);
         inputValidation = new InputValidation(activity);
     }
 
-    @Override
-    public void onClick(View v)
-    {
-        switch(v.getId())
-        {
-            case R.id.loginBtn:
-                inputValidation();
-                break;
-            case R.id.textviewLinkRegister:
-                Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(intentRegister);
-                break;
-        }
-    }
-
+    //Validate input
     private void inputValidation()
     {
         if(!inputValidation.isInputEditTextFilled(inputEmployeeID ,inputPassword, getString(R.string.error_message_empty)))
@@ -89,33 +69,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         else
         {
-            Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
         }
     }
 
+    //Verify data from SQLite
     private void verifyFromSQL()
     {
         //Data Query
         if (databaseManager.checkDoctor(inputEmployeeID.getText().toString().trim(), inputPassword.getText().toString().trim()))
         {
-            //Start doctor activity
-            SharedPreferences myPref = getSharedPreferences("doctorPref",0);
+            //Put employeeId in shared pref
+            SharedPreferences myPref = getSharedPreferences("empId",0);
             SharedPreferences.Editor editor = myPref.edit();
-            editor.putString("doctorIdPref", inputEmployeeID.getText().toString().trim());
+            editor.putString("empIdPref", inputEmployeeID.getText().toString().trim());
             editor.apply();
 
+            //Start doctor activity
             Intent intentPatient= new Intent(getApplicationContext(), PatientActivity.class);
             startActivity(intentPatient);
             emptyTextview();
         }
         else if (databaseManager.checkNurse(inputEmployeeID.getText().toString().trim(), inputPassword.getText().toString().trim()))
         {
-            //Start nurse activity
-            SharedPreferences myPref = getSharedPreferences("nursePref",0);
+            //Put employeeId in shared pref
+            SharedPreferences myPref = getSharedPreferences("empId",0);
             SharedPreferences.Editor editor = myPref.edit();
-            editor.putString("nurseIdPref", inputEmployeeID.getText().toString().trim());
+            editor.putString("empIdPref", inputEmployeeID.getText().toString().trim());
             editor.apply();
 
+            //Start nurse activity
             Intent intentTest= new Intent(getApplicationContext(), TestDataActivity.class);
             startActivity(intentTest);
             emptyTextview();
@@ -130,5 +113,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     {
         inputEmployeeID.setText(null);
         inputPassword.setText(null);
+    }
+
+    //OnClick of button or link
+    @Override
+    public void onClick(View v)
+    {
+        switch(v.getId())
+        {
+            case R.id.loginBtn:
+                inputValidation();
+                break;
+            case R.id.textviewLinkRegister:
+                Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intentRegister);
+                break;
+        }
     }
 }
